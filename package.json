@@ -1,0 +1,14 @@
+{
+  "name": "supra-studio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Offline interactive Toyota Supra A80 studio with engine visualization and recorded audio",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "scripts": {
+    "build": "python3 tools/build.py",
+    "test": "node tests/run.cjs"
+  },
+  "devDependencies": {
+    "playwright": "1.63.0"
+  }
+}

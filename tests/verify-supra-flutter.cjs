@@ -1,0 +1,28 @@
+const path = require('node:path');
+const fs = require('node:fs');
+const {pathToFileURL} = require('node:url');
+const DEFAULT_TARGET = pathToFileURL(path.resolve(__dirname, '../index.html')).href;
+const artifacts = path.join(__dirname, '.artifacts');
+fs.mkdirSync(artifacts, {recursive: true});
+process.argv[2] ||= DEFAULT_TARGET;
+const {chromium}=require('playwright');const assert=require('node:assert/strict');
+(async()=>{const b=await chromium.launch({headless:true,args:['--enable-unsafe-swiftshader','--use-angle=swiftshader']});try{
+ const p=await b.newPage({viewport:{width:1000,height:720},offline:true});const errors=[];p.on('pageerror',e=>errors.push(e.message));
+ await p.goto(process.argv[2]);await p.waitForFunction(()=>window.supraLab,{timeout:60000});
+ assert.equal(await p.evaluate(()=>typeof supraLab.sampleAudio?.flutter),'function','Recorded turbo flutter must fire on gear changes');
+ await p.locator('#sound').click({force:true});await p.waitForFunction(()=>supraLab.sampleAudio.enabled);
+ await p.evaluate(()=>{const s=supraLab.state;s.running=true;s.throttle=75;s.rpm=5500;s.gear=1;s.speed=80;});
+ const before=await p.evaluate(()=>supraLab.sampleAudio.inspect().flutterEvents);
+ await p.selectOption('#gear','2');
+ const r=await p.evaluate(()=>({audio:supraLab.sampleAudio.inspect(),rpm:supraLab.state.rpm,gear:supraLab.state.gear,throttle:supraLab.state.throttle}));
+ assert.equal(r.audio.flutterEvents,before+1);assert.equal(r.gear,2);assert.ok(r.rpm>0);assert.ok(r.audio.pulsesScheduled>=5);assert.ok(r.audio.decoded.turbo>0);assert.equal(r.throttle,0,'New gear begins at zero progress');
+ assert.equal(await p.evaluate(()=>{play();return supraLab.sampleAudio.voices.size;}),0,'Pause button must immediately cancel scheduled flutter pulses');
+ const stopped=await p.evaluate(()=>supraLab.sampleAudio.inspect().flutterEvents);await p.selectOption('#gear','3');assert.equal(await p.evaluate(()=>supraLab.sampleAudio.inspect().flutterEvents),stopped,'No flutter while paused');
+ await p.evaluate(()=>{supraLab.state.running=true;supraLab.state.rpm=5000;supraLab.state.throttle=70;supraLab.state.speed=80;});
+ await p.locator('#sound').click({force:true});const muted=await p.evaluate(()=>supraLab.sampleAudio.inspect().flutterEvents);await p.selectOption('#gear','4');assert.equal(await p.evaluate(()=>supraLab.sampleAudio.inspect().flutterEvents),muted,'No flutter while muted');
+ await p.locator('#sound').click({force:true});await p.waitForFunction(()=>supraLab.sampleAudio.enabled);
+ await p.evaluate(()=>{const s=supraLab.state;s.running=true;s.rpm=5600;s.throttle=80;s.speed=80;});
+ const lift=await p.evaluate(()=>supraLab.sampleAudio.inspect().flutterEvents);await p.locator('#throttle').evaluate(n=>{n.value='0';n.dispatchEvent(new Event('input',{bubbles:true}));});assert.equal(await p.evaluate(()=>supraLab.sampleAudio.inspect().flutterEvents),lift+1,'Throttle lift under boost must trigger flutter');
+ await p.locator('#audioVolume').evaluate(n=>{n.value='20';n.dispatchEvent(new Event('input',{bubbles:true}));});assert.equal(await p.evaluate(()=>supraLab.sampleAudio.volume),.2);
+ await p.evaluate(()=>{supraLab.state.running=false;});assert.deepEqual(errors,[]);console.log(JSON.stringify({result:'PASS',offline:true,shift:r,errors},null,2));
+}finally{await b.close();}})().catch(e=>{console.error(e);process.exit(1)});

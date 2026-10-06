@@ -1,0 +1,82 @@
+ATTRIBUTION — SUPRA STUDIO
+
+AUTHOR OF EXTERIOR / ORIGINAL NATIVE WHEELS / NATIVE INTERIOR
+Lexyc16
+Original work: Toyota Supra (A80) 1993
+Source: https://sketchfab.com/3d-models/toyota-supra-a80-1993-dd897d7823784bc5893c183c1328e8cb
+Author profile: https://sketchfab.com/Lexyc16
+Original Blender file linked by the author:
+https://drive.google.com/file/d/1jHXa47toWNf_nEHoHWXzsaR0VOWyDg9V/view
+License: Creative Commons Attribution-NonCommercial 4.0 International
+https://creativecommons.org/licenses/by-nc/4.0/
+Full license text supplied in licenses/CC-BY-NC-4.0.txt.
+No endorsement by the original author is implied.
+
+ADAPTATION / CHANGES
+Geometry normalized to metre-like studio coordinates; main body subdivided
+with creases and preserved boundaries. Hood, targa panel and doors partitioned
+into selectable groups. Roof headliner patch removed to make targa opening
+visible. Imported wheels attached to existing mechanical wheel groups.
+Source brake/exhaust duplicates and front plate removed. Missing original
+texture references replaced by self-contained procedural materials and paint;
+front signal colors adjusted. Headlamp internals and front intake slats added.
+Earlier custom 2JZ engine, chassis and educational drivetrain animation integrated.
+Lighting, reflection, Russian controls, cutaway, selection, removal, exploded view
+and a fully embedded offline HTML application added.
+This is an adaptation, not the author's unmodified original model.
+The visual base remains A80 1993; a factory-accurate 1998 conversion is not claimed.
+
+THREE.JS
+Three.js r160 and its GLTFLoader / Reflector modules.
+Copyright (c) 2010-2023 three.js authors. MIT License.
+Full text: licenses/THREE-MIT.txt.
+Project: https://github.com/mrdoob/three.js
+
+TOYOTA
+Toyota and Supra names identify the depicted vehicle only.
+This educational studio is not an official Toyota product.
+
+WHEELS EDITION CHANGES
+Four additional original procedural rim styles added: white six-spoke,
+white five-spoke, polished chrome deep-dish, bronze ten-spoke.
+Original source tires retained; original stock rim geometry remains selectable.
+Custom rim surfaces, spokes, barrels, lips, bolts and caps created for this studio.
+Designs are visually inspired by user-supplied references, not branded replicas.
+Road animation and wheel-speed-linked presentation retained.
+
+
+RECORDED AUDIO — SOUND & DRIVE EDITION
+Engine: Import car revs on Chassis Dyno with Turbo.wav
+Author: editboy23
+Source: https://freesound.org/people/editboy23/sounds/496171/
+Public preview used: https://cdn.freesound.org/previews/496/496171_1784475-hq.mp3
+License: CC0 1.0 Universal
+The uploader identifies the car as a Toyota Supra on a chassis dyno.
+Exact model year, engine variant, tune and source RPM were not independently verified.
+Changes: selected recorded segments, loop-seam crossfades, RPM-linked resampling,
+layer crossfades, load-dependent filtering and output compression.
+This is processed recorded audio, not a factory-accurate acoustic simulation.
+
+Turbo source: Turbo Spooling and Blow Off.WAV
+Author: EwanPenman11
+Source: https://freesound.org/people/EwanPenman11/sounds/659544/
+Public preview used: https://cdn.freesound.org/previews/659/659544_13241413-hq.mp3
+License: CC0 1.0 Universal
+The uploader describes a passing car with audible turbo blow-off.
+The car model is not specified. This is NOT verified native Supra compressor-surge flutter.
+Changes: short sample extraction, high/low-pass filtering, normalization and
+six declining, time-spaced playback pulses to produce a mounted stutututu effect.
+No endorsement by the audio uploaders is implied.
+CC0 text: licenses/CC0-1.0.txt
+
+CONTROL CHANGES
+Requested educational cumulative RPM/road-speed bands with per-gear slider reset;
+not a physical gearbox model. Existing stand-mode drivetrain demonstration preserved.
+
+PUBLICATION PREPARATION
+Exporter/plugin extras (including unrelated BlenderKit asset metadata and local
+paths) removed from GLB; sourceAuthor/sourceLicense attribution fields preserved.
+Geometry and binary buffer data preserved. Source code and offline resources
+separated from the embedded HTML; a standard-library Python builder provided.
+No new separate open-source license is assigned to the original application code
+by this publication preparation. Third-party licenses remain component-specific.
